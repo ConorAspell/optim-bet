@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 from dash.dependencies import Input, Output
 
-import dash_daq as daq
 import dash_table
 
 import dash_bootstrap_components as dbc
@@ -25,9 +24,9 @@ header = html.H3(
     'Edit the Stake Column'
 )
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-threed_df = read_df('threed_data')
-twod_df = read_df('twod_data')
-tournament = read_df('tournaments')
+threed_df = read_df('threed_data.csv')
+twod_df = read_df('twod_data.csv')
+tournament = read_df('tournament_odds.csv')
 threed_df['match'] = threed_df['home_team'] + " v " + threed_df['away_team'] + " " +threed_df['league'].str.replace('_', ' ')
 
 

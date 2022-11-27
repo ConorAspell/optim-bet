@@ -2,14 +2,19 @@ import requests
 import json
 import pandas as pd
 import numpy as np
+import boto3
 
-def read_df(table):
-    data = requests.get('https://kjgumdk8w4.execute-api.eu-west-1.amazonaws.com/test2/test?table_name=' + table)
-    data = data.json()
-    data = data['body']
-    data=pd.DataFrame(data)
+s3_client = boto3.client('s3')
+
+def read_df(key):
+    bucket_name= 'optim-bet-bucket'
+    data = s3_client.get_object(Bucket=bucket_name, Key=key)
+    # data = requests.get('https://kjgumdk8w4.execute-api.eu-west-1.amazonaws.com/test2/test?table_name=' + table)
+    # data = data.json()
+    # data = data['body']
+    # data=pd.DataFrame(data)
+    return pd.read_csv(data['Body'], sep=',')
     
-    return data
 
 
 def general_spread(odds):
